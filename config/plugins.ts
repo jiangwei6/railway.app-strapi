@@ -6,16 +6,16 @@ export default ({ env }) => ({
     },
     upload: {
         config: {
-            provider: 'cloudinary',
+            provider: '@strapi/provider-upload-aws-s3',
             providerOptions: {
-                cloud_name: env('CLOUDINARY_NAME'),
-                api_key: env('CLOUDINARY_KEY'),
-                api_secret: env('CLOUDINARY_SECRET'),
-            },
-            actionOptions: {
-                upload: {},
-                uploadStream: {},
-                delete: {},
+                accessKeyId: env('AWS_ACCESS_KEY_ID'),
+                secretAccessKey: env('AWS_ACCESS_SECRET'),
+                region: env('AWS_REGION'),
+                params: {
+                    Bucket: env('AWS_BUCKET'),
+                },
+                endpoint: env('AWS_ENDPOINT'),
+                s3ForcePathStyle: true,
             },
         },
     },
